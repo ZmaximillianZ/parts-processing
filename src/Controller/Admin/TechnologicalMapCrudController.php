@@ -2,26 +2,29 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Worker;
+use App\Entity\TechnologicalMap;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class WorkerCrudController extends AbstractCrudController
+class TechnologicalMapCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Worker::class;
+        return TechnologicalMap::class;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('position'),
-            IntegerField::new('qualification'),
-            BooleanField::new('isQualification'),
-            IntegerField::new('status'),
+            TextField::new('name'),
+            IntegerField::new('x'),
+            IntegerField::new('y'),
+            IntegerField::new('z'),
+            IntegerField::new('weight'),
+            TextField::new('materialGrade'),
+            IntegerField::new('tolerance'),
         ];
     }
 }
