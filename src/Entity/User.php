@@ -73,12 +73,6 @@ class User implements UserInterface
      */
     private $status;
 
-    /**
-     * @ ORM\OneToOne(targetEntity="App\Entity\Worker", inversedBy="worker")
-     * @ ORM\JoinColumn(name="person_id", referencedColumnName="id")
-     */
-//    private $worker;
-
     public function __toString()
     {
         return (string) $this->getFirstName() ?? '' . ' ' . $this->getLastName() ?? '';
@@ -250,16 +244,4 @@ class User implements UserInterface
     {
         return sprintf('%s %s %s', $this->firstName ?? '', $this->lastName ?? '', $this->middleName ?? '');
     }
-
-//    public function getWorker()
-//    {
-//        return $this->worker;
-//    }
-//
-//    public function setWorker($worker): self
-//    {
-//        $this->worker = $worker;
-//
-//        return $this;
-//    }
 }

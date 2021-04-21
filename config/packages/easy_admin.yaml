@@ -28,8 +28,10 @@ easy_admin:
         fields:
           - id
           - position
+          - user
           - qualification
           - { property: 'isQualification',  type: 'boolean' }
+          - brigade
           - status
         form:
           fields:
@@ -39,7 +41,95 @@ easy_admin:
             - isQualification
             - status
 
-          #                    - lastLogin
-          # if administrators are allowed to edit users' passwords and roles, add this:
-    #                    - { property: 'plainPassword', type: 'text', type_options: { required: false } }
-    #                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
+    WorkerEquipment:
+      class: App\Entity\WorkerEquipment
+      list:
+        fields:
+          - id
+          - qualification
+          - worker
+          - equipment
+        form:
+          - qualification
+          - worker
+          - equipment
+
+    Tool:
+      class: App\Entity\Tool
+      list:
+        fields:
+          - id
+          - name
+          - type
+          - status
+        form:
+          - name
+          - type
+          - status
+
+    TechnolgicalMap:
+      class: App\Entity\TechnolgicalMap
+      list:
+        fields:
+          - id
+          - name
+          - x
+          - y
+          - z
+          - weight
+          - materialGrade
+          - tolerance
+        form:
+          - name
+          - x
+          - y
+          - z
+          - weight
+          - materialGrade
+          - tolerance
+
+    Process:
+      class: App\Entity\Process
+      list:
+        fields:
+          - time
+          - qualification
+          - type
+          - status
+        form:
+          - time
+          - qualification
+          - type
+          - status
+
+    Equipment:
+      class: App\Entity\Equipment
+      list:
+        field:
+          - accuracy
+          - type
+          - status
+        form:
+          - accuracy
+          - type
+          - status
+
+    Detail:
+      class: App\Entity\Detail
+      list:
+        fields:
+          - status
+        form:
+          - status
+
+    Brigade:
+      class: App\Entity\Brigade
+      list:
+        fields:
+          - workShift
+          - type
+          - status
+        form:
+          - workShift
+          - type
+          - status

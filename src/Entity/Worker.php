@@ -51,7 +51,7 @@ class Worker
     private $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="user")
+     * @ORM\OneToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
