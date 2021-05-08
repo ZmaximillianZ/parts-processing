@@ -44,18 +44,18 @@ class Tool
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Process")
+     * @ORM\ManyToOne(targetEntity="Process", cascade={"persist"})
      */
     private $processes;
 
     public function __construct()
     {
-        $this->processes = new ArrayCollection();
+//        $this->processes = new ArrayCollection();
     }
 
     public function __toString()
     {
-        return (string) $this->id ?? '';
+        return (string) $this->name ?? '';
     }
 
     /**
@@ -65,7 +65,7 @@ class Tool
      */
     public function onPrePersist(): void
     {
-        $this->createdAt = new DateTime('now');
+        $this->createdAt = new DateTime('now', (new \DateTimeZone('Europe/Moscow')));
     }
 
     public function getId()

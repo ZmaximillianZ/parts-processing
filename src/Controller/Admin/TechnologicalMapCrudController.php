@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\TechnologicalMap;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -25,6 +26,7 @@ class TechnologicalMapCrudController extends AbstractCrudController
             IntegerField::new('weight'),
             TextField::new('materialGrade'),
             IntegerField::new('tolerance'),
+            CollectionField::new('processes'),
         ];
     }
 }

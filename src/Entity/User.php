@@ -121,7 +121,7 @@ class User implements UserInterface
      */
     public function onPrePersist(): void
     {
-        $this->createdAt = new DateTime('now');
+        $this->createdAt = new DateTime('now', (new \DateTimeZone('Europe/Moscow')));
     }
 
     /**
@@ -131,7 +131,7 @@ class User implements UserInterface
      */
     public function onPreUpdate(): void
     {
-        $this->updatedAt = new DateTime('now');
+        $this->updatedAt = new DateTime('now', (new \DateTimeZone('Europe/Moscow')));
     }
 
     public function getFirstName(): ?string

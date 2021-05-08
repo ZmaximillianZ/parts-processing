@@ -24,6 +24,12 @@ class Process
     private $id;
 
     /**
+     * @ORM\Column(name="name", type="string", length=128, nullable=true)
+     */
+    private $name;
+
+
+    /**
      * @ORM\Column(name="time", type="integer", length=10, nullable=true)
      */
     private $time;
@@ -49,12 +55,12 @@ class Process
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TechnologicalMap", inversedBy="processes")
+     * @ORM\ManyToOne(targetEntity="TechnologicalMap", inversedBy="processes", cascade={"persist"})
      */
     private $technologicalMap;
 
     /**
-     * @ORM\OneToOne(targetEntity="Equipment", inversedBy="process")
+     * @ORM\ManyToOne(targetEntity="Equipment", inversedBy="processes", cascade={"persist"})
      */
     private $equipment;
 
@@ -73,17 +79,26 @@ class Process
      */
     private $details;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Process", mappedBy="parent")
+     */
+    protected $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Process", inversedBy="children")
+     * @ORM\JoinColumn(name="parent", referencedColumnName="id")
+     */
+    private $parent;
+
     public function __construct()
     {
         $this->tools = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
-
-// todo: make relation
-//    private $parentId;
 
     public function __toString()
     {
-        return (string) $this->id ?? '';
+        return (string) $this->name ?? '';
     }
 
     /**
@@ -93,7 +108,7 @@ class Process
      */
     public function onPrePersist(): void
     {
-        $this->createdAt = new DateTime('now');
+        $this->createdAt = new DateTime('now', (new \DateTimeZone('Europe/Moscow')));
     }
 
     public function getId()
@@ -104,6 +119,18 @@ class Process
     public function setId($id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
@@ -230,5 +257,28 @@ class Process
         $detail->setProcess(null);
 
         return $this;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function setParent(Process $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    public function getChildren(): ?Collection
+    {
+        return $this->children;
+    }
+
+    public function addChild(Process $children): void
+    {
+        $this->children[] = $children;
+        $children->setParent($this);
     }
 }

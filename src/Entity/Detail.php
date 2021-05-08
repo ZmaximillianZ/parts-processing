@@ -22,6 +22,11 @@ class Detail
     private $id;
 
     /**
+     * @ORM\Column(name="name", type="string", length=128, nullable=true)
+     */
+    private $name;
+
+    /**
      * @ORM\Column(name="status", type="integer", length=6, nullable=true)
      */
     private $status;
@@ -33,7 +38,7 @@ class Detail
 
     /**
      * текущий процесс
-     * @ORM\ManyToOne(targetEntity="Process", inversedBy="details")
+     * @ORM\ManyToOne(targetEntity="Process", inversedBy="details", cascade={"persist"})
      */
     private $process;
 
@@ -44,7 +49,7 @@ class Detail
 
     public function __toString()
     {
-        return (string) $this->id ?? '';
+        return (string) $this->name ?? '';
     }
 
     /**
@@ -54,7 +59,7 @@ class Detail
      */
     public function onPrePersist(): void
     {
-        $this->createdAt = new DateTime('now');
+        $this->createdAt = new DateTime('now', (new \DateTimeZone('Europe/Moscow')));
     }
 
     public function getId()
@@ -65,6 +70,18 @@ class Detail
     public function setId($id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

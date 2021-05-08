@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 use DateTime;
 
 /**
@@ -14,6 +14,18 @@ use DateTime;
  */
 class Worker
 {
+    public const EMPLOYED = 1;
+    public const ON_HOLIDAY = 2;
+    public const ON_SICK_LEAVE = 3;
+    public const FIRED = 4;
+
+    public const STATUSES = [
+        self::EMPLOYED,
+        self::ON_HOLIDAY,
+        self::ON_SICK_LEAVE,
+        self::FIRED
+    ];
+
     /**
      * @ORM\Column(name="id", type="integer", nullable=true)
      *
@@ -23,8 +35,7 @@ class Worker
     private $id;
 
     /**
-     * todo: make as enum
-     * @ORM\Column(name="position", type="string", length=6, nullable=true)
+     * @ORM\Column(name="position", type="string", length=64, nullable=true)
      */
     private $position;
 
@@ -62,13 +73,18 @@ class Worker
     private $workerEquipments;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Brigade", inversedBy="workers")
+     * @ORM\ManyToOne(targetEntity="Brigade", inversedBy="workers", cascade={"persist"})
      */
     private $brigade;
 
+    public function __construct()
+    {
+        $this->workerEquipments = new ArrayCollection();
+    }
+
     public function __toString()
     {
-        return (string) $this->id ?? '';
+        return sprintf('%s (%s)', $this->user->getFirstName(), $this->position)  ?? '';
     }
 
     /**
@@ -78,7 +94,7 @@ class Worker
      */
     public function onPrePersist(): void
     {
-        $this->createdAt = new DateTime('now');
+        $this->createdAt = new DateTime('now', (new \DateTimeZone('Europe/Moscow')));
     }
 
     public function getId()

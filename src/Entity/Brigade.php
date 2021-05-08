@@ -60,7 +60,7 @@ class Brigade
      */
     public function onPrePersist(): void
     {
-        $this->createdAt = new DateTime('now');
+        $this->createdAt = new DateTime('now', (new \DateTimeZone('Europe/Moscow')));
     }
 
     public function getId()
@@ -132,6 +132,16 @@ class Brigade
     {
         $this->workers[] = $worker;
         $worker->setBrigade($this);
+
+        return $this;
+    }
+
+    public function addWorkers(array $workers): self
+    {
+        foreach ($workers as $worker) {
+            $this->workers[] = $worker;
+            $worker->setBrigade($this);
+        }
 
         return $this;
     }

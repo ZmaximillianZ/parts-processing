@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -48,8 +49,7 @@ class TechnologicalMap
     private $weight;
 
     /**
-     * марка материала todo: change to enum
-     * @ORM\Column(name="material_grade", type="string", length=6, nullable=true)
+     * @ORM\Column(name="material_grade", type="string", length=128, nullable=true)
      */
     private $materialGrade;
 
@@ -74,6 +74,11 @@ class TechnologicalMap
      */
     private $details;
 
+    public function __construct()
+    {
+        $this->tools = new ArrayCollection();
+    }
+
     public function __toString()
     {
         return (string) $this->id ?? '';
@@ -86,7 +91,7 @@ class TechnologicalMap
      */
     public function onPrePersist(): void
     {
-        $this->createdAt = new DateTime('now');
+        $this->createdAt = new DateTime('now', (new \DateTimeZone('Europe/Moscow')));
     }
 
     public function getId()
@@ -209,10 +214,19 @@ class TechnologicalMap
         return $this;
     }
 
+    public function addProcesses(array $processes): self
+    {
+        foreach ($processes as $process) {
+            $this->processes[] = $process;
+        }
+
+        return $this;
+    }
+
     public function removeProcess(Process $process): self
     {
         $this->processes->remove($process);
-        $process->setTechnologicalMap($this);
+        $process->setTechnologicalMap(null);
 
         return $this;
     }

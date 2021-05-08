@@ -23,6 +23,11 @@ class Equipment
     private $id;
 
     /**
+     * @ORM\Column(name="name", type="string", length=128, nullable=true)
+     */
+    private $name;
+
+    /**
      * точность выполнения
      * @ORM\Column(name="accurancy", type="float", length=6, nullable=true)
      */
@@ -44,9 +49,9 @@ class Equipment
     private $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="Process", inversedBy="equipment")
+     * @ORM\OneToMany(targetEntity="Process", mappedBy="equipment")
      */
-    private $process;
+    private $processes;
 
     /**
      * @ORM\OneToMany(targetEntity="WorkerEquipment", mappedBy="equipment")
@@ -55,7 +60,7 @@ class Equipment
 
     public function __toString()
     {
-        return (string) $this->id ?? '';
+        return (string) $this->name ?? '';
     }
 
     /**
@@ -65,7 +70,7 @@ class Equipment
      */
     public function onPrePersist(): void
     {
-        $this->createdAt = new DateTime('now');
+        $this->createdAt = new DateTime('now', (new \DateTimeZone('Europe/Moscow')));
     }
 
     public function getId()
@@ -76,6 +81,18 @@ class Equipment
     public function setId($id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
@@ -128,14 +145,23 @@ class Equipment
         return $this;
     }
 
-    public function getProcess()
+    public function getProcesses(): ?Collection
     {
-        return $this->process;
+        return $this->processes;
     }
 
-    public function setProcess($process): self
+    public function addProcess(Process $process): self
     {
-        $this->process = $process;
+        $this->processes[] = $process;
+//        $process->setEquipment($this);
+
+        return $this;
+    }
+
+    public function removeProcess(Process $process): self
+    {
+        $this->processes->remove($process);
+        $process->setEquipment(null);
 
         return $this;
     }

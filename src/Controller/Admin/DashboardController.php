@@ -34,14 +34,14 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::section('Important!!');
-        yield MenuItem::linkToCrud('User', 'fa fa-file-word', User::class);
-        yield MenuItem::linkToCrud('Worker', 'fa fa-file-word', Worker::class);
-        yield MenuItem::linkToCrud('WorkerEquipment', 'fa fa-file-word', WorkerEquipment::class);
-        yield MenuItem::linkToCrud('Equipment', 'fa fa-file-word', Equipment::class);
-        yield MenuItem::linkToCrud('Brigade', 'fa fa-file-word', Brigade::class);
-        yield MenuItem::linkToCrud('Detail', 'fa fa-file-word', Detail::class);
-        yield MenuItem::linkToCrud('Process', 'fa fa-file-word', Process::class);
-        yield MenuItem::linkToCrud('TechnologicalMap', 'fa fa-file-word', TechnologicalMap::class);
-        yield MenuItem::linkToCrud('Tool', 'fa fa-file-word', Tool::class);
+        yield MenuItem::linkToCrud('User', 'fa fa-user-o', User::class);
+        yield MenuItem::linkToCrud('Worker', 'far fa-handshake', Worker::class);
+        yield MenuItem::linkToCrud('WorkerEquipment', 'far fa-life-ring', WorkerEquipment::class);
+        yield MenuItem::linkToCrud('Equipment', 'fas fa-cog', Equipment::class);
+        yield MenuItem::linkToCrud('Brigade', 'fa fa-users', Brigade::class);
+        yield MenuItem::linkToCrud('Detail', 'fa fa-diamond', Detail::class);
+        yield MenuItem::linkToCrud('Process', 'fa fa-chain', Process::class);
+        yield MenuItem::linkToCrud('TechnologicalMap', 'fa fa-map-o', TechnologicalMap::class);
+        yield MenuItem::linkToCrud('Tool', 'fab fa-scribd', Tool::class);
     }
 }

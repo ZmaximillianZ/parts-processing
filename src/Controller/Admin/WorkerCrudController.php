@@ -19,14 +19,12 @@ class WorkerCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            TextField::new('position'),
-            AssociationField::new('user'),
-            IntegerField::new('qualification'),
-            BooleanField::new('isQualification'),
-            CollectionField::new('workerEquipments'),
-            AssociationField::new('brigade'),
-            IntegerField::new('status'),
-        ];
+            yield TextField::new('position');
+            yield AssociationField::new('user');
+            yield IntegerField::new('qualification');
+            yield BooleanField::new('isQualification');
+//            yield AssociationField::new('workerEquipments');
+            yield AssociationField::new('brigade');
+            yield IntegerField::new('status');
     }
 }

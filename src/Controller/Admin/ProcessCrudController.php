@@ -4,10 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\Process;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
 
 class ProcessCrudController extends AbstractCrudController
 {
@@ -19,7 +19,10 @@ class ProcessCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TimeField::new('time'),
+            TextField::new('name'),
+            IntegerField::new('time', 'estimation for operation in minutes'),
+            AssociationField::new('equipment'),
+            CollectionField::new('tools'),
             IntegerField::new('qualification'),
             IntegerField::new('type'),
             IntegerField::new('status'),

@@ -39,6 +39,13 @@ easy_admin:
             - position
             - qualification
             - isQualification
+            - property: workerEquipments
+              type: 'Symfony\Component\Form\Extension\Core\Type\CollectionType'
+#              type: 'choice'
+#              type_options:
+#                  mapped: false
+#                  expanded: true
+#                  multiple: true
             - status
 
     WorkerEquipment:

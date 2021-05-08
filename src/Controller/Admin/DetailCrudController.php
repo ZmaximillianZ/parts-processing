@@ -18,6 +18,7 @@ class DetailCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            TextField::new('name'),
             IntegerField::new('status'),
         ];
     }

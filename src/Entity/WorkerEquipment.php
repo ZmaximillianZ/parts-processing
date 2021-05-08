@@ -27,18 +27,18 @@ class WorkerEquipment
     private $qualification;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Worker", inversedBy="workerEquipments")
+     * @ORM\ManyToOne(targetEntity="Worker", inversedBy="workerEquipments", cascade={"persist"})
      */
     private $worker;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Equipment", inversedBy="workerEquipments")
+     * @ORM\ManyToOne(targetEntity="Equipment", inversedBy="workerEquipments", cascade={"persist"})
      */
     private $equipment;
 
     public function __toString()
     {
-        return (string) $this->id ?? '';
+        return (string) sprintf('%s(qualification: %s)', $this->worker->getUser()->getFirstName(), (string) $this->qualification) ?? '';
     }
 
     public function getId()
