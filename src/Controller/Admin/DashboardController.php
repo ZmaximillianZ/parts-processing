@@ -12,6 +12,7 @@ use App\Entity\Tool;
 use App\Entity\User;
 use App\Entity\Worker;
 use App\Entity\WorkerEquipment;
+use App\Entity\WorkerEquipmentDetailProcess;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -43,5 +44,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Process', 'fa fa-chain', Process::class);
         yield MenuItem::linkToCrud('TechnologicalMap', 'fa fa-map-o', TechnologicalMap::class);
         yield MenuItem::linkToCrud('Tool', 'fab fa-scribd', Tool::class);
+        yield MenuItem::linkToCrud('Details in process', 'fab fa-scribd', WorkerEquipmentDetailProcess::class);
     }
 }

@@ -28,7 +28,6 @@ class Process
      */
     private $name;
 
-
     /**
      * @ORM\Column(name="time", type="integer", length=10, nullable=true)
      */

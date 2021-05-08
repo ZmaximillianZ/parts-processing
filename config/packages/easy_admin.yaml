@@ -48,6 +48,15 @@ easy_admin:
 #                  multiple: true
             - status
 
+    WorkerEquipmentDetailProcess:
+      label: 'Details in process'
+      class: App\Entity\WorkerEquipmentDetailProcess
+      list:
+        - time
+        - equipment
+        - worker
+        - detail
+
     WorkerEquipment:
       class: App\Entity\WorkerEquipment
       list:

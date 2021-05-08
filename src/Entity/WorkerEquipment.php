@@ -2,9 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\WorkerEquipmentRepository")
@@ -35,6 +34,11 @@ class WorkerEquipment
      * @ORM\ManyToOne(targetEntity="Equipment", inversedBy="workerEquipments", cascade={"persist"})
      */
     private $equipment;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WorkerEquipmentDetailProcess", mappedBy="workerEquipment")
+     */
+    private $workerEquipmentDetailProcesses;
 
     public function __toString()
     {
@@ -85,6 +89,26 @@ class WorkerEquipment
     public function setEquipment($equipment): self
     {
         $this->equipment = $equipment;
+
+        return $this;
+    }
+
+    public function getWorkerEquipmentDetailProcesses(): ?Collection
+    {
+        return $this->workerEquipmentDetailProcesses;
+    }
+
+    public function addWorkerEquipmentDetailProcesses(WorkerEquipmentDetailProcess $process): self
+    {
+        $this->workerEquipmentDetailProcesses[] = $process;
+
+        return $this;
+    }
+
+    public function removeWorkerEquipmentDetailProcesses(WorkerEquipmentDetailProcess $process): self
+    {
+        $this->workerEquipmentDetailProcesses->remove($process);
+        $process->setWorkerEquipment(null);
 
         return $this;
     }

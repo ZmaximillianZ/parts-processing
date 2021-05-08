@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 use DateTime;
 
 /**
@@ -37,15 +37,14 @@ class Detail
     private $createdAt;
 
     /**
-     * текущий процесс
-     * @ORM\ManyToOne(targetEntity="Process", inversedBy="details", cascade={"persist"})
-     */
-    private $process;
-
-    /**
      * @ORM\ManyToOne(targetEntity="TechnologicalMap", inversedBy="details")
      */
     private $technologicalMap;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WorkerEquipmentDetailProcess", mappedBy="detail")
+     */
+    private $workerEquipmentDetailProcesses;
 
     public function __toString()
     {
@@ -110,18 +109,6 @@ class Detail
         return $this;
     }
 
-    public function getProcess()
-    {
-        return $this->process;
-    }
-
-    public function setProcess($process): self
-    {
-        $this->process = $process;
-
-        return $this;
-    }
-
     public function getTechnologicalMap()
     {
         return $this->technologicalMap;
@@ -130,6 +117,26 @@ class Detail
     public function setTechnologicalMap($technologicalMap): self
     {
         $this->technologicalMap = $technologicalMap;
+
+        return $this;
+    }
+
+    public function getWorkerEquipmentDetailProcesses(): ?Collection
+    {
+        return $this->workerEquipmentDetailProcesses;
+    }
+
+    public function addWorkerEquipmentDetailProcesses(WorkerEquipmentDetailProcess $process): self
+    {
+        $this->workerEquipmentDetailProcesses[] = $process;
+
+        return $this;
+    }
+
+    public function removeWorkerEquipmentDetailProcesses(WorkerEquipmentDetailProcess $process): self
+    {
+        $this->workerEquipmentDetailProcesses->remove($process);
+        $process->setWorkerEquipment(null);
 
         return $this;
     }

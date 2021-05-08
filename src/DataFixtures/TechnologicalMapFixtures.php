@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Process;
 use App\Entity\TechnologicalMap;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
