@@ -22,6 +22,7 @@ class WorkerEquipmentDetailProcess
 
     /**
      * @ORM\ManyToOne(targetEntity="WorkerEquipment", inversedBy="workerEquipmentDetailProcesses")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $workerEquipment;
 
@@ -81,7 +82,9 @@ class WorkerEquipmentDetailProcess
 
     public function getEquipment()
     {
-        return $this->getWorkerEquipment()->getEquipment();
+        $we = $this->getWorkerEquipment();
+
+        return $we->getEquipment();
     }
 
     public function setEquipment(Equipment $equipment): self
@@ -95,7 +98,9 @@ class WorkerEquipmentDetailProcess
 
     public function getWorker()
     {
-        return $this->getWorkerEquipment()->getWorker();
+        $we = $this->getWorkerEquipment();
+
+        return $we->getWorker();
     }
 
     public function setWorker(Worker $worker): self

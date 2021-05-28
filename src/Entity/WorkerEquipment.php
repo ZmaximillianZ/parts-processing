@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\WorkerEquipmentRepository")
@@ -27,11 +28,13 @@ class WorkerEquipment
 
     /**
      * @ORM\ManyToOne(targetEntity="Worker", inversedBy="workerEquipments", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $worker;
 
     /**
      * @ORM\ManyToOne(targetEntity="Equipment", inversedBy="workerEquipments", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $equipment;
 
@@ -40,9 +43,23 @@ class WorkerEquipment
      */
     private $workerEquipmentDetailProcesses;
 
+    #[Pure]
+    public function __construct()
+    {
+        $this->equipment = new Equipment();
+        $this->worker = new Worker();
+    }
+
     public function __toString()
     {
-        return (string) sprintf('%s(qualification: %s)', $this->worker->getUser()->getFirstName(), (string) $this->qualification) ?? '';
+        $user = $this->worker ? $this->worker->getUser() : null;
+
+        return sprintf(
+            '%s(qualification: %s), equipment:%s',
+            $user ? $user->getFirstName() : '',
+            (string) $this->qualification,
+                $this->equipment
+        ) ?? '';
     }
 
     public function getId()

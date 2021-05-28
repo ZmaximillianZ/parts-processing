@@ -1,5 +1,10 @@
 easy_admin:
   site_name: 'parts processing'
+  show:
+    max_results: 30
+  design:
+    menu:
+      - { label: 'Report', route: 'report' }
   user:
     display_name: true
     display_avatar: false
@@ -53,9 +58,9 @@ easy_admin:
       class: App\Entity\WorkerEquipmentDetailProcess
       list:
         - time
-        - equipment
-        - worker
+        - workerEquipment
         - detail
+        - createdAt
 
     WorkerEquipment:
       class: App\Entity\WorkerEquipment

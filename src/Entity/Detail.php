@@ -32,6 +32,11 @@ class Detail
     private $status;
 
     /**
+     * @ORM\Column(name="batch", type="integer", length=6, nullable=true)
+     */
+    private $batch;
+
+    /**
      * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"default"="NULL"})
      */
     private $createdAt;
@@ -93,6 +98,18 @@ class Detail
     public function setStatus($status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getBatch()
+    {
+        return $this->batch;
+    }
+
+    public function setBatch($batch): self
+    {
+        $this->batch = $batch;
 
         return $this;
     }

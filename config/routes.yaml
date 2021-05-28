@@ -4,3 +4,19 @@
 dashboard:
   path: /admin
   controller: App\Controller\Admin\DashboardController::index
+
+high_quality:
+  path: /high_quality
+  controller: App\Controller\Admin\ReportController::highQuality
+
+equipment_load:
+  path: /equipment_load
+  controller: App\Controller\Admin\ReportController::equipmentLoad
+
+batch_certain_operation:
+  path: /batch_certain_operation
+  controller: App\Controller\Admin\ReportController::batchCertainOperation
+
+count_batch_by_time:
+  path: /count_batch_by_time
+  controller: App\Controller\Admin\ReportController::countBatchByTime
