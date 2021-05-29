@@ -3,7 +3,7 @@
 #    controller: App\Controller\DefaultController::index
 dashboard:
   path: /admin
-  controller: App\Controller\Admin\DashboardController::index
+  controller: App\Controller\Admin\DashboardController::highQuality
 
 high_quality:
   path: /high_quality

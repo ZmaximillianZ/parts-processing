@@ -1,5 +1,25 @@
 {% extends '@!EasyAdmin/page/content.html.twig' %}
 
 {% block main %}
-    <h1>Equipment load!!</h1>
+    <h3>Загруженность оборудования</h3>
+    <table class="table datagrid with-rounded-top ">
+        <thead>
+        <tr>
+            {% for field in fields %}
+                <th class="text-"><span>{{ field }}</span></th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in data %}
+            <tr>
+                <td class="text- field-text-"><span>{{ item.name }}</span></td>
+                <td class="text- field-text-"><span>{{ (item.total_time/60)|round(2, 'floor') }} hours</span></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <tr>
+
+    </tr>
 {% endblock %}

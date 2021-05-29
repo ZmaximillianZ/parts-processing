@@ -1,5 +1,29 @@
 {% extends '@!EasyAdmin/page/content.html.twig' %}
 
 {% block main %}
-    <h1>Count batch by time!!</h1>
+    <h3>Количество партий на оборудование по заданным интервалам времени</h3>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <table class="table datagrid with-rounded-top ">
+        <thead>
+        <tr>
+            {% for field in fields %}
+                <th class="text-"><span>{{ field }}</span></th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in data %}
+            <tr>
+                <td class="text- field-text-"><span>{{ item.batch_count }}</span></td>
+                <td class="text- field-text-"><span>{{ item.batch }}</span></td>
+                <td class="text- field-text-"><span>{{ item.name }}</span></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <tr>
+
+    </tr>
 {% endblock %}

@@ -2,14 +2,26 @@
 
 
 {% block main %}
+<h3>Список оборудования для высококачественной обработки деталей</h3>
 <table class="table datagrid with-rounded-top ">
         <thead>
         <tr>
         {% for field in fields %}
-                <th class="text-">{{ field }}</th>
+            <th class="text-"><span>{{ field }}</span></th>
         {% endfor %}
         </tr>
         </thead>
+        <tbody>
+                {% for item in data %}
+                        <tr>
+                            <td class="text- field-text-"><span>{{ item.id }}</span></td>
+                            <td class="text- field-text-"><span>{{ item.accurancy }}</span></td>
+                            <td class="text- field-text-"><span>{{ item.status }}</span></td>
+                            <td class="text- field-text-"><span>{{ item.created_at }}</span></td>
+                            <td class="text- field-text-"><span>{{ item.name }}</span></td>
+                        </tr>
+                {% endfor %}
+        </tbody>
 </table>
 <tr>
 
